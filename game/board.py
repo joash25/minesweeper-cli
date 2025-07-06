@@ -112,3 +112,39 @@ def get_adjacent_cell_positions(row_idx: int, col_idx: int) -> tuple[tuple[int, 
     )
 
     return adjacent_cell_positions
+
+
+def reveal_non_mine_cells(board: list[list[dict[str, bool | int]]], row_size: int,
+                        col_size: int, row_idx: int, col_idx: int) -> None:
+    """
+    Recursively reveals all connected non-mine cells starting from the given position.
+
+    Expands outward until it reaches cells that are adjacent to at least one mine
+    (i.e., cells with a non-zero value). Only hidden, non-mine cells are revealed.
+
+    Args:
+        board (list[list[dict[str, bool | int]]]): A 2D list representing the game board.
+        row_size (int): Number of rows in the board. Must be >= 1.
+        col_size (int): Number of columns in the board. Must be >= 1.
+        row_idx (int): Starting row index. Must be in range [0, row_size).
+        col_idx (int): Starting column index. Must be in range [0, col_size).
+
+    Returns:
+        None
+    """
+    if row_idx < 0 or row_idx >= row_size or \
+        col_idx < 0 or col_idx >= col_size or \
+        board[row_idx][col_idx]["visible"]:
+        return None
+    
+    board[row_idx][col_idx]["visible"] = True
+
+    if board[row_idx][col_idx]["value"] != 0:
+        return None
+    
+    adjacent_cell_positions: tuple[tuple[int, int]] = \
+        get_adjacent_cell_positions(row_idx, col_idx)
+
+    for _row_idx, _col_idx in adjacent_cell_positions:
+        reveal_non_mine_cells(board, row_size, col_size,_row_idx, _col_idx)
+    
