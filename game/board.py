@@ -54,3 +54,34 @@ def deploy_mines_on_board(board: list[list[dict[str, bool | int]]],
             deployed_mines_count += 1
 
     return deployed_mines_count
+
+
+def update_cells_with_adjacent_mine_counts(board: list[list[dict[str, bool | int]]],
+                                            row_size: int, col_size: int) -> None:
+    """
+    Updates each non-mine cell on the board with the count of adjacent mines.
+
+    Args:
+        board (list[list[dict[str, bool | int]]]): A 2D list representing the game board.
+        row_size (int): Number of rows in the board. Must be >= 1.
+        col_size (int): Number of columns in the board. Must be >= 1.
+
+    Returns:
+        None
+    """
+    for row_idx in range(row_size):
+        for col_idx in range(col_size):
+            if board[row_idx][col_idx]["value"] == -1:
+                continue
+
+            adjacent_mines_count: int = 0
+            adjacent_cell_positions: tuple[tuple[int, int]] = \
+                get_adjacent_cell_positions(row_idx, col_idx)
+
+            for _row_idx, _col_idx in adjacent_cell_positions:
+                if _row_idx >= 0 and _row_idx < row_size and \
+                    _col_idx >= 0 and _col_idx < col_size and \
+                    board[_row_idx][_col_idx]["value"] == -1:
+                    adjacent_mines_count += 1
+                
+            board[row_idx][col_idx]["value"] = adjacent_mines_count
