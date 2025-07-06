@@ -85,3 +85,30 @@ def update_cells_with_adjacent_mine_counts(board: list[list[dict[str, bool | int
                     adjacent_mines_count += 1
                 
             board[row_idx][col_idx]["value"] = adjacent_mines_count
+
+
+def get_adjacent_cell_positions(row_idx: int, col_idx: int) -> tuple[tuple[int, int]]:
+    """
+    Returns the positions of all adjacent cells around a given cell in a grid.
+
+    Includes all eight neighboring positions: horizontal, vertical, and diagonal.
+
+    Args:
+        row_idx (int): The row index of the current cell.
+        col_idx (int): The column index of the current cell.
+
+    Returns:
+        tuple[tuple[int, int]]: A list of (row, column) positions for all adjacent cells (8 neighbors).
+    """
+    adjacent_cell_positions: tuple[tuple[int, int]] = ( 
+        (row_idx - 1, col_idx),
+        (row_idx + 1, col_idx),
+        (row_idx, col_idx - 1),
+        (row_idx, col_idx + 1),
+        (row_idx - 1, col_idx - 1),
+        (row_idx - 1, col_idx + 1),
+        (row_idx + 1, col_idx - 1),
+        (row_idx + 1, col_idx + 1)
+    )
+
+    return adjacent_cell_positions
