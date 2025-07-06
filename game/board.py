@@ -147,4 +147,23 @@ def reveal_non_mine_cells(board: list[list[dict[str, bool | int]]], row_size: in
 
     for _row_idx, _col_idx in adjacent_cell_positions:
         reveal_non_mine_cells(board, row_size, col_size,_row_idx, _col_idx)
+
+
+def get_visible_cell_count(board: list[list[dict[str, bool | int]]]) -> int:
+    """
+    Counts and returns the number of visible cells on the board.
+
+    Args:
+        board (list[list[dict[str, bool | int]]]): A 2D list representing the game board.
+
+    Returns:
+        int: The total number of visible (revealed) cells.
+    """
+    visible_cell_count = 0
+
+    for row in board:
+        for col in row:
+            if col["visible"]:
+                visible_cell_count += 1
     
+    return visible_cell_count
