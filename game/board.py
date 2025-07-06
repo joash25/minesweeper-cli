@@ -167,3 +167,16 @@ def get_visible_cell_count(board: list[list[dict[str, bool | int]]]) -> int:
                 visible_cell_count += 1
     
     return visible_cell_count
+
+
+def reveal_mine_cells(board: list[list[dict[str, bool | int]]]) -> None:
+    """
+    Reveals all mine cells on the board by setting their 'visible' flag to True.
+
+    Args:
+        board (list[list[dict[str, bool | int]]]): A 2D list representing the game board.
+    """
+    for row in board:
+        for cell in row:
+            if cell["value"] == -1:
+                cell["visible"] = True
