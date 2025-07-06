@@ -1,0 +1,25 @@
+1. Initilize Minesweeper board
+    - Create a 2D array of cells (10 x 10)
+    - Randomly place mines in 25% of total cells
+    - Calculate Cell Hints For each cell that is not a mine:
+        - Count the number of adjacent cells that contain mines
+        - Set the cell's value to that count
+
+2. Game Loop 
+    - Repeat until all non-mine cells are revealed:
+        - Display the current state of game board (hidden/revealed) 
+        - Prompt player for a cell position (row, col)
+        - If selected cell is a mine:
+            - Exit the game Loop
+        - Reveal the cell
+        - If the cell has 0 adjacent mines:
+            - Recursively reveal all adjacent safe cells
+   
+3. Print Game Result 
+    - If all non-mine cells are revealed:
+        - Print "You Won"
+    - Else:
+        - Print "You Lose"
+
+4. End the game
+
