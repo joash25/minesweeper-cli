@@ -72,6 +72,7 @@ def print_board(board: list[list[dict[str, bool | int]]], row_size: int, col_siz
     """
     digit_count: int = len(str(max(row_size, col_size)))
 
+    print(end="\n\n")
     print_column_numbers(col_size, digit_count)
 
     for row_idx, board_row in enumerate(board):
