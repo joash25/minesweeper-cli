@@ -3,7 +3,7 @@
 A simple command-line Minesweeper puzzle game.
 
 ## Demo: Terminal Preview
-<img src="/demo-gif.gif" alt="demo" width=150 />
+<img src="/demo-gif.gif" alt="demo" width=200 />
 
 ## How to Use
 Follow these steps to set up and run the game:
