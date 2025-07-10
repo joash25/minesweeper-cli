@@ -1,5 +1,21 @@
 from random import randrange
 
+class MinesweeperBoard:
+    """
+    Represents the game board for Minesweeper.
+    """
+
+    def __init__(self, row_size: int, col_size: int, mine_percent: float) -> None:
+        self.row_size: int = row_size
+        self.col_size: int = col_size
+        self.mine_percent: float = mine_percent
+        self.cell_count: int = row_size * col_size
+        self.mine_cell_count: int = int(self.cell_count * self.mine_percent)
+        self.non_mine_cell_count: int = self.cell_count - self.mine_cell_count
+        self.revealed_non_mine_cell_count: int = 0 
+
+# ******************** old code ********************  
+
 def create_board(row_size: int, col_size: int) -> list[list[dict[str, bool | int]]] | None:
     """
     Creates a 2D board (list of lists) initialized with {"visible": False, "value": 0}.
