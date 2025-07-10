@@ -15,9 +15,15 @@ def get_player_move(row_size: int, col_size: int) -> tuple[int, int]:
         tuple[int, int]: A tuple (row, column) representing the player's chosen
         coordinates, using 1-based indexing.
     """
+    prompt: str = f"+ Please enter the row and column number: "
+    
     while True:
-        prompt: str = f"+ Please enter the row and column number: "
-        coord: list[str] = input(chalk.blue(prompt)).strip().split(" ")
+        coord: list[str] = []
+        try:
+            coord = input(chalk.blue(prompt)).strip().split(" ")
+        except KeyboardInterrupt:
+            exit(1)
+
         if len(coord) > 1:
             row_num: str = coord[0] 
             col_num: str = coord[1]
