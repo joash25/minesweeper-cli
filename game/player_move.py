@@ -1,5 +1,3 @@
-from simple_chalk import chalk
-
 def get_player_move(row_size: int, col_size: int) -> tuple[int, int]:
     """
     Prompt the player to enter a valid row and column within the board boundaries.
@@ -20,7 +18,7 @@ def get_player_move(row_size: int, col_size: int) -> tuple[int, int]:
     while True:
         coord: list[str] = []
         try:
-            coord = input(chalk.blue(prompt)).strip().split(" ")
+            coord = input(prompt).strip().split(" ")
         except KeyboardInterrupt:
             exit(1)
 
@@ -35,7 +33,7 @@ def get_player_move(row_size: int, col_size: int) -> tuple[int, int]:
                 if 0 <= row_idx < row_size and 0 <= col_idx < col_size:
                     return (row_idx, col_idx)
             
-        print(chalk.yellow("\nOops! It looks like something went wrong. Please try again."), end="\n\n")
+        print("\nOops! It looks like something went wrong. Please try again.", end="\n\n")
 
 
 
