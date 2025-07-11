@@ -14,6 +14,34 @@ class MinesweeperBoard:
         self.non_mine_cell_count: int = self.cell_count - self.mine_cell_count
         self.revealed_non_mine_cell_count: int = 0 
 
+    @property
+    def row_size(self) -> int:
+        return self._row_size
+    
+    @property
+    def col_size(self) -> int:
+        return self._col_size
+    
+    @property
+    def mine_percent(self) -> float:
+        return self._mine_percent
+    
+    @property
+    def cell_count(self) -> int:
+        return self._cell_count
+    
+    @property
+    def mine_cell_count(self) -> int:
+        return self._mine_cell_count
+    
+    @property
+    def non_mine_cell_count(self) -> int:
+        return self._non_mine_cell_count
+
+    @property
+    def revealed_non_mine_cell_count(self) -> int:
+        return self._revealed_non_mine_cell_count
+
 # ******************** old code ********************  
 
 def create_board(row_size: int, col_size: int) -> list[list[dict[str, bool | int]]] | None:
