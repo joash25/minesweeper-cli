@@ -1,4 +1,5 @@
 from .cell import Cell
+from .custom_types import Board
 
 def print_column_numbers(col_size: int, digit_count: int) -> None:
     """
@@ -58,13 +59,13 @@ def print_horizontal_cells(board_row: list[Cell], row_idx: int, digit_count: int
     print()
 
 
-def print_board(board: list[list[dict[str, bool | int]]], row_size: int, col_size: int) -> None:
+def print_board(board: Board, row_size: int, col_size: int) -> None:
     """
     Prints the entire game board with row and column headers.
 
-    Each cell is represented as a dictionary with:
-        - "visible" (bool): Whether the cell has been revealed.
-        - "value" (int): The cell's value (-1 for a mine, or 0-8 for adjacent mine counts).
+    Each cell is represented as a cell object with:
+        - `visible` (bool): Whether the cell has been revealed.
+        - `value` (int): The cell's value (-1 for a mine, or 0-8 for adjacent mine counts).
 
     Args:
         board (list): A 2D list of dictionaries representing the board state.
