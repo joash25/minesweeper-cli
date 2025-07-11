@@ -1,3 +1,5 @@
+from .cell import Cell
+
 def print_column_numbers(col_size: int, digit_count: int) -> None:
     """
     Prints the column headers (numbers) aligned with the game board.
@@ -29,15 +31,14 @@ def print_horizontal_partition(col_size: int, digit_count: int) -> None:
     print()
 
 
-def print_horizontal_cells(board_row: list[dict[str, bool | int]], row_idx: int,
-                           digit_count: int) -> None:
+def print_horizontal_cells(board_row: list[Cell], row_idx: int, digit_count: int) -> None:
     """
     Prints the contents of a single row of the board.
 
     Args:
-        board_row (list): A list of dictionaries for each cell in the row, each containing:
-            - "visible" (bool): Whether the cell is revealed.
-            - "value" (int): -1 for a mine, or number of adjacent mines.
+        board_row (list): A list of cell object for each cell in the row, each containing:
+            - `visible` (bool): Whether the cell is revealed.
+            - `value` (int): -1 for a mine, or number of adjacent mines.
         row_idx (int): The index of the current row (0-based).
         digit_count (int): Width for formatting row numbers and cells.
     """
@@ -48,10 +49,10 @@ def print_horizontal_cells(board_row: list[dict[str, bool | int]], row_idx: int,
 
         print(f" {' ' * n}", end="")
 
-        if cell["visible"] and cell["value"] == -1:
+        if cell.visible and cell.value == -1:
             print("@ |", end="")
-        elif cell["visible"]:
-            print(f"{cell['value']} |", end="")
+        elif cell.visible:
+            print(f"{cell.value} |", end="")
         else:
             print("  |", end="")
     print()
