@@ -1,7 +1,7 @@
 from .cell import Cell
 from .custom_types import Board
 
-def print_column_numbers(col_size: int, digit_count: int) -> None:
+def _print_column_numbers(col_size: int, digit_count: int) -> None:
     """
     Prints the column headers (numbers) aligned with the game board.
 
@@ -17,7 +17,7 @@ def print_column_numbers(col_size: int, digit_count: int) -> None:
     print()
 
 
-def print_horizontal_partition(col_size: int, digit_count: int) -> None:
+def _print_horizontal_partition(col_size: int, digit_count: int) -> None:
     """
     Prints a horizontal line separator between rows of the board.
 
@@ -32,7 +32,7 @@ def print_horizontal_partition(col_size: int, digit_count: int) -> None:
     print()
 
 
-def print_horizontal_cells(board_row: list[Cell], row_idx: int, digit_count: int) -> None:
+def _print_horizontal_cells(board_row: list[Cell], row_idx: int, digit_count: int) -> None:
     """
     Prints the contents of a single row of the board.
 
@@ -75,9 +75,9 @@ def print_board(board: Board, row_size: int, col_size: int) -> None:
     digit_count: int = len(str(max(row_size, col_size)))
 
     print(end="\n\n")
-    print_column_numbers(col_size, digit_count)
+    _print_column_numbers(col_size, digit_count)
 
     for row_idx, board_row in enumerate(board):
-        print_horizontal_partition(col_size, digit_count)
-        print_horizontal_cells(board_row, row_idx, digit_count)
-    print_horizontal_partition(col_size, digit_count)
+        _print_horizontal_partition(col_size, digit_count)
+        _print_horizontal_cells(board_row, row_idx, digit_count)
+    _print_horizontal_partition(col_size, digit_count)
