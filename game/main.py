@@ -4,8 +4,8 @@ from .minesweeper_board import MinesweeperBoard
 from .print_board import print_board
 from .player_move import get_player_move
 
-ROW_SIZE: int = 3 # Number of rows on the board
-COL_SIZE: int = 3 # Number of columns on the board
+ROW_SIZE: int = 8 # Number of rows on the board
+COL_SIZE: int = 8 # Number of columns on the board
 MINE_PERCENT: float = 0.25 # Percentage of cells that contain mines
 
 def _game_loop() -> None:
