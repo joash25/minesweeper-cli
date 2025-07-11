@@ -217,6 +217,15 @@ class MinesweeperBoard:
         for _row_idx, _col_idx in adjacent_cell_positions:
             self.reveal_non_mine_cells(_row_idx, _col_idx)
 
+    def reveal_mine_cells(self) -> None:
+        """
+        Reveals all mine cells on the board by setting their 'visible' flag to True.
+        """
+        for row in self._grid:
+            for cell in row:
+                if cell.value == -1:
+                    cell.visible = True
+
 # ******************** old code ********************  
 
 def create_board(row_size: int, col_size: int) -> list[list[dict[str, bool | int]]] | None:
