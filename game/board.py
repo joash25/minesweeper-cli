@@ -18,6 +18,7 @@ class MinesweeperBoard:
         self._revealed_non_mine_cell_count: int = 0
         self._grid: Board = self._initialize_grid()
         self._deploy_mines()
+        self._update_adjacent_mine_counts()
 
     @property
     def row_size(self) -> int:
@@ -148,7 +149,27 @@ class MinesweeperBoard:
             (row_idx + 1, col_idx - 1),
             (row_idx + 1, col_idx + 1)
         )
-         
+
+    def _update_adjacent_mine_counts(self) -> None:
+        """
+        Updates each non-mine cell on the grid with the count of adjacent mines.
+        """
+        for row_idx in range(self._row_size):
+            for col_idx in range(self._col_size):
+                if self._grid[row_idx][col_idx].value == -1:
+                    continue
+    
+                adjacent_mine_count: int = 0
+                adjacent_cell_positions: tuple[tuple[int, int]] = self._get_adjacent_cell_positions(row_idx, col_idx)
+    
+                for _row_idx, _col_idx in adjacent_cell_positions:
+                    if 0 <= _row_idx < self._row_size and \
+                        0 <= _col_idx < self._col_size and \
+                        self._grid[_row_idx][_col_idx].value == -1:
+                        adjacent_mine_count += 1
+                    
+                self._grid[row_idx][col_idx].value = adjacent_mine_count
+   
 # ******************** old code ********************  
 
 def create_board(row_size: int, col_size: int) -> list[list[dict[str, bool | int]]] | None:
