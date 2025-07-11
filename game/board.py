@@ -1,5 +1,8 @@
 from random import randrange
 
+from .custom_types import Board
+from .cell import Cell
+
 class MinesweeperBoard:
     """
     Represents the game board for Minesweeper.
@@ -86,7 +89,6 @@ class MinesweeperBoard:
         
         if not hasattr(self, "_mine_percent"):
             self._mine_percent = percent
-          
 
 # ******************** old code ********************  
 
