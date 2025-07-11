@@ -6,6 +6,10 @@ from .cell import Cell
 class MinesweeperBoard:
     """
     Represents the game board for Minesweeper.
+
+    Manages the internal grid of cells, mine placement, and 
+    logic for updating and revealing cells. The board is initialized 
+    based on a given number of rows, columns, and mine density (percentage).
     """
 
     def __init__(self, row_size: int, col_size: int, mine_percent: float) -> None:
