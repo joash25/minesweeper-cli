@@ -205,8 +205,8 @@ class MinesweeperBoard:
                 f"Invalid type for `col_idx` in {self.__class__.__name__}.reveal_non_mine_cells"
                 f": expected int, got {type(col_idx).__name__}")
         
-        if 0 > row_idx >= self._row_size or \
-            0 > col_idx >= self._col_size or \
+        if row_idx < 0 or row_idx >= self._row_size or \
+            col_idx < 0 or col_idx >= self._col_size or \
             self._grid[row_idx][col_idx].visible:
             return None
         
