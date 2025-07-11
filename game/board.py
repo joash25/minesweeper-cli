@@ -17,6 +17,7 @@ class MinesweeperBoard:
         self._non_mine_cell_count: int = self.cell_count - self.mine_cell_count
         self._revealed_non_mine_cell_count: int = 0
         self._grid: Board = self._initialize_grid()
+        self._deploy_mines()
 
     @property
     def row_size(self) -> int:
@@ -107,6 +108,22 @@ class MinesweeperBoard:
         return [
             [Cell() for _ in range(self._col_size)] 
             for _ in range(self._row_size)]
+
+    def _deploy_mines(self) -> None:
+        """
+        Places mines randomly on the grid based on a mine percentage.
+
+        Each mine is represented by -1.
+        """
+        deployed_mine_count: int = 0
+
+        while deployed_mine_count < self._mine_cell_count:
+            row_idx: int = randrange(self._row_size)
+            col_idx: int = randrange(self._col_size)
+
+            if self._grid[row_idx][col_idx].value != -1:
+                self._grid[row_idx][col_idx].value = -1
+                deployed_mine_count += 1
         
 # ******************** old code ********************  
 
