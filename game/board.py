@@ -15,7 +15,8 @@ class MinesweeperBoard:
         self._cell_count: int = row_size * col_size
         self._mine_cell_count: int = int(self.cell_count * self.mine_percent)
         self._non_mine_cell_count: int = self.cell_count - self.mine_cell_count
-        self._revealed_non_mine_cell_count: int = 0 
+        self._revealed_non_mine_cell_count: int = 0
+        self._grid: Board = self._initialize_grid()
 
     @property
     def row_size(self) -> int:
@@ -44,6 +45,10 @@ class MinesweeperBoard:
     @property
     def revealed_non_mine_cell_count(self) -> int:
         return self._revealed_non_mine_cell_count
+    
+    @property
+    def grid(self) -> Board:
+        return self._grid
     
     @row_size.setter
     def row_size(self, size: int) -> None:
@@ -90,6 +95,19 @@ class MinesweeperBoard:
         if not hasattr(self, "_mine_percent"):
             self._mine_percent = percent
 
+    def _initialize_grid(self) -> Board:
+        """
+        Creates a 2D grid (list of lists) initialized with Cell objects.
+    
+        Each element in the grid represents a Cell.
+    
+        Returns:
+            Board: A 2D list representing the grid.
+        """
+        return [
+            [Cell() for _ in range(self._col_size)] 
+            for _ in range(self._row_size)]
+        
 # ******************** old code ********************  
 
 def create_board(row_size: int, col_size: int) -> list[list[dict[str, bool | int]]] | None:
