@@ -169,7 +169,44 @@ class MinesweeperBoard:
                         adjacent_mine_count += 1
                     
                 self._grid[row_idx][col_idx].value = adjacent_mine_count
-   
+
+    def reveal_non_mine_cells(self, row_idx: int, col_idx: int) -> None:
+        """
+        Recursively reveals all connected non-mine cells starting from the given position.
+    
+        Expands outward until it reaches cells that are adjacent to at least one mine
+        (i.e., cells with a non-zero value). Only hidden, non-mine cells are revealed.
+    
+        Args:
+            row_idx (int): Starting row index. Must be in range [0, row_size).
+            col_idx (int): Starting column index. Must be in range [0, col_size).
+        """
+        if not isinstance(row_idx, int):
+            raise TypeError(
+                f"Invalid type for `row_idx` in {self.__class__.__name__}.reveal_non_mine_cells"
+                f": expected int, got {type(row_idx).__name__}")
+
+        if not isinstance(col_idx, int):
+            raise TypeError(
+                f"Invalid type for `col_idx` in {self.__class__.__name__}.reveal_non_mine_cells"
+                f": expected int, got {type(col_idx).__name__}")
+        
+        if 0 > row_idx >= self._row_size or \
+            0 > col_idx >= self._col_size or \
+            self._grid[row_idx][col_idx].visible:
+            return None
+        
+        self._grid[row_idx][col_idx].visible = True
+        self._revealed_non_mine_cell_count += 1
+    
+        if self._grid[row_idx][col_idx].value != 0:
+            return None
+        
+        adjacent_cell_positions: tuple[tuple[int, int]] = self._get_adjacent_cell_positions(row_idx, col_idx)
+    
+        for _row_idx, _col_idx in adjacent_cell_positions:
+            self.reveal_non_mine_cells(_row_idx, _col_idx)
+
 # ******************** old code ********************  
 
 def create_board(row_size: int, col_size: int) -> list[list[dict[str, bool | int]]] | None:
