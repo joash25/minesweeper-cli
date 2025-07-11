@@ -139,6 +139,16 @@ class MinesweeperBoard:
         Returns:
             tuple[tuple[int, int]]: A list of (row, column) positions for all adjacent cells (8 neighbors).
         """
+        if not isinstance(row_idx, int):
+            raise TypeError(
+                f"Invalid type for `row_idx` in {self.__class__.__name__}._get_adjacent_cell_positions"
+                f": expected int, got {type(row_idx).__name__}")
+
+        if not isinstance(col_idx, int):
+            raise TypeError(
+                f"Invalid type for `col_idx` in {self.__class__.__name__}._get_adjacent_cell_positions"
+                f": expected int, got {type(col_idx).__name__}")
+        
         return ( 
             (row_idx - 1, col_idx),
             (row_idx + 1, col_idx),
