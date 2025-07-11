@@ -9,10 +9,10 @@ class MinesweeperBoard:
         self.row_size: int = row_size
         self.col_size: int = col_size
         self.mine_percent: float = mine_percent
-        self.cell_count: int = row_size * col_size
-        self.mine_cell_count: int = int(self.cell_count * self.mine_percent)
-        self.non_mine_cell_count: int = self.cell_count - self.mine_cell_count
-        self.revealed_non_mine_cell_count: int = 0 
+        self._cell_count: int = row_size * col_size
+        self._mine_cell_count: int = int(self.cell_count * self.mine_percent)
+        self._non_mine_cell_count: int = self.cell_count - self.mine_cell_count
+        self._revealed_non_mine_cell_count: int = 0 
 
     @property
     def row_size(self) -> int:
@@ -41,6 +41,52 @@ class MinesweeperBoard:
     @property
     def revealed_non_mine_cell_count(self) -> int:
         return self._revealed_non_mine_cell_count
+    
+    @row_size.setter
+    def row_size(self, size: int) -> None:
+        if not isinstance(size, int):
+            raise TypeError(
+                f"Invalid type for `row_size` in {self.__class__.__name__}"
+                f": expected int, got {type(size).__name__}")
+        
+        if size < 1:
+            raise ValueError(
+                f"Invalid value for `size` in {self.__class__.__name__}"
+                f": must be `size` >= 1, got {size}")
+        
+        if not hasattr(self, "_row_size"):
+            self._row_size = size
+
+    @col_size.setter
+    def col_size(self, size: int) -> None:
+        if not isinstance(size, int):
+            raise TypeError(
+                f"Invalid type for `size` in {self.__class__.__name__}"
+                f": expected int, got {type(size).__name__}")
+        
+        if size < 1:
+            raise ValueError(
+                f"Invalid value for `size` in {self.__class__.__name__}"
+                f": must be `size` >= 1, got {size}")
+        
+        if not hasattr(self, '_col_size'):
+            self._col_size = size
+    
+    @mine_percent.setter
+    def mine_percent(self, percent: float) -> None:
+        if not isinstance(percent, float):
+            raise TypeError(
+                f"Invalid type for `percent` in {self.__class__.__name__}"
+                f": expected float, got {type(percent).__name__}")
+        
+        if percent < 0.1 or percent > 0.9:
+            raise ValueError(
+                f"Invalid value for `percent` in {self.__class__.__name__}"
+                f": must be 0.1 <= `percent` <= 0.9, got {percent}")
+        
+        if not hasattr(self, "_mine_percent"):
+            self._mine_percent = percent
+          
 
 # ******************** old code ********************  
 
