@@ -124,7 +124,31 @@ class MinesweeperBoard:
             if self._grid[row_idx][col_idx].value != -1:
                 self._grid[row_idx][col_idx].value = -1
                 deployed_mine_count += 1
-        
+
+    def _get_adjacent_cell_positions(self, row_idx: int, col_idx: int) -> tuple[tuple[int, int]]:
+        """
+        Returns the positions of all adjacent cells around a given cell in a grid.
+    
+        Includes all eight neighboring positions: horizontal, vertical, and diagonal.
+    
+        Args:
+            row_idx (int): The row index of the current cell.
+            col_idx (int): The column index of the current cell.
+    
+        Returns:
+            tuple[tuple[int, int]]: A list of (row, column) positions for all adjacent cells (8 neighbors).
+        """
+        return ( 
+            (row_idx - 1, col_idx),
+            (row_idx + 1, col_idx),
+            (row_idx, col_idx - 1),
+            (row_idx, col_idx + 1),
+            (row_idx - 1, col_idx - 1),
+            (row_idx - 1, col_idx + 1),
+            (row_idx + 1, col_idx - 1),
+            (row_idx + 1, col_idx + 1)
+        )
+         
 # ******************** old code ********************  
 
 def create_board(row_size: int, col_size: int) -> list[list[dict[str, bool | int]]] | None:
